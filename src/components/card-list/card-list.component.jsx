@@ -1,19 +1,12 @@
-import { Component } from "react";
 import Card from "../card/card.component";
 import "./card-list.styles.css";
 
-class SearchBox extends Component {
-  render() {
-    const { monsters } = this.props;
+const CardList = ({ monsters }) => (
+  <div className="card-list">
+    {monsters.map((monster) => (
+      <Card monster={monster} key={monster.id} />
+    ))}
+  </div>
+);
 
-    return (
-      <div className="card-list">
-        {monsters.map((monster) => (
-          <Card monster={monster} />
-        ))}
-      </div>
-    );
-  }
-}
-
-export default SearchBox;
+export default CardList;

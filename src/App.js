@@ -6,6 +6,7 @@ import "./App.css";
 
 const App = () => {
   const [monsters, setMonsters] = useState([]);
+  const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchField, setSearchField] = useState("");
 
   useEffect(() => {
@@ -14,9 +15,13 @@ const App = () => {
       .then((users) => setMonsters(users));
   }, []);
 
-  const filteredMonsters = monsters.filter((monster) =>
-    monster.name.toLocaleLowerCase().includes(searchField)
-  );
+  useEffect(() => {
+    const filteredMonsters = monsters.filter((monster) =>
+      monster.name.toLocaleLowerCase().includes(searchField)
+    );
+    setFilteredMonsters(filteredMonsters);
+  }, [monsters, searchField]);
+
   const onSearchChange = (event) => {
     const searchField = event.target.value.toLocaleLowerCase();
     setSearchField(searchField);
@@ -35,7 +40,6 @@ const App = () => {
   return (
     <div className="App">
       <h1 className="app-title">Monsters Rolodex</h1>
-
       <SearchBox {...searchBoxProps} />
       <CardList {...cardListProps} />
     </div>
