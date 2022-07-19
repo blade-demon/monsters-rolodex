@@ -8,6 +8,7 @@ const App = () => {
   const [monsters, setMonsters] = useState([]);
   const [filteredMonsters, setFilteredMonsters] = useState(monsters);
   const [searchField, setSearchField] = useState("");
+  const [title, setTitle] = useState("Monsters Rolodex");
 
   console.log("rendered");
 
@@ -29,10 +30,21 @@ const App = () => {
     setSearchField(searchField);
   };
 
+  const onTitleChange = (event) => {
+    const searchField = event.target.value.toLocaleLowerCase();
+    setTitle(searchField);
+  };
+
   const searchBoxProps = {
     className: "search-box",
     placeholder: "search monsters",
     onChangeHandler: onSearchChange,
+  };
+
+  const titleInputProps = {
+    className: "search-box",
+    placeholder: "search monsters",
+    onChangeHandler: onTitleChange,
   };
 
   const cardListProps = {
@@ -41,8 +53,10 @@ const App = () => {
 
   return (
     <div className="App">
-      <h1 className="app-title">Monsters Rolodex</h1>
+      <h1 className="app-title">{title}</h1>
       <SearchBox {...searchBoxProps} />
+      <br />
+      <SearchBox {...titleInputProps} />
       <CardList {...cardListProps} />
     </div>
   );
